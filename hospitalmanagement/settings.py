@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-#import dj_database_url
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,10 +80,22 @@ WSGI_APPLICATION = 'hospitalmanagement.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+
+     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dakh9iv9a6ogb5',
+        'USER': 'ppwbsecufpjkez',
+        'PASSWORD': 'a3963db282e200552d647191846b134654fde8fd698038a658b591bf44aeb0ec',
+        "HOST": 'ec2-3-226-134-153.compute-1.amazonaws.com',
+        'PORT': 5432,
+ 
+
     }
+
 }
 
 
@@ -119,8 +132,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 STATIC_URL = '/static/'
 
