@@ -132,8 +132,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
