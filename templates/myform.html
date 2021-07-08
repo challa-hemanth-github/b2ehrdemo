@@ -1,0 +1,107 @@
+{% extends 'hospital/patient_base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<head>
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    .note {
+      text-align: center;
+      height: 80px;
+      background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+      color: #fff;
+      font-weight: bold;
+      line-height: 80px;
+    }
+
+    .form-content {
+      padding: 5%;
+      border: 1px solid #ced4da;
+      margin-bottom: 2%;
+    }
+
+    .form-control {
+      border-radius: 1.5rem;
+    }
+
+    .btnSubmit {
+      border: none;
+      border-radius: 1.5rem;
+      padding: 1%;
+      width: 20%;
+      cursor: pointer;
+      background: #0062cc;
+      color: #fff;
+    }
+
+    .menu {
+      top: 50px;
+    }
+  </style>
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<br><br>
+{% if message %}
+<script>
+  var a = "{{message}}";
+  alert(a);
+</script>
+
+{% endif %}
+
+
+<!------ add appointment page by patient(sumit)  ------->
+<form method="POST" action="{% url 'submitform' %}">
+  {% csrf_token %}
+  <div class="container register-form">
+    <div class="form">
+      <div class="note">
+        <p>Send Daily Details</p>
+      </div>
+      <div class="form-content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+                <h5> Pulse </h5>
+                <input type="text" class="form-control" id="pulseInput" name="pulseInput" placeholder="Enter Pulse">
+            </div>
+            <div class="form-group">
+                <h5> Saturation </h5>
+                <input type="text" class="form-control" id="saturationInput" name="saturationInput" placeholder="Enter Saturation">
+            </div>
+            <div class="form-group">
+                <h5> Temperature </h5>
+                <small id="emailHelp" class="form-text text-muted">Please enter temperature in Fahrenheit only.</small>
+                <input type="text" class="form-control" id="tempInput" name="tempInput" placeholder="Enter Temperature">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Enter anything if needed</label>
+                <textarea class="form-control" id="extraText" name="extraText" rows="3"></textarea>
+            </div>
+
+          </div>
+
+        </div>
+        <button type="submit" class="btnSubmit">Send</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+{% endblock content %}
+
+<!--
+{% render_field PatientDailyMonitoringForm.description class="form-control" placeholder="Description" %}
+{% render_field PatientDailyMonitoringForm.doctorId class="form-control" placeholder="doctor" %}
+{% render_field PatientDailyMonitoringForm.pulse class="form-control" placeholder="Pulse Value" %}
+{% render_field PatientDailyMonitoringForm.saturation class="form-control" placeholder="Saturation" %}
+{% render_field PatientDailyMonitoringForm.temperature class="form-control" placeholder="Temperature" %}
+-->
